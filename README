@@ -1,0 +1,53 @@
+README
+======
+Author: Mike Bennett (wayv at stressbunny dot com)
+Last Update: 14/08/2003
+
+
+wayV is...
+----------
+1. Experiment with human computer interaction, especially
+   gesture based computing.
+
+2. Initially some software that does hand writing/gesture 
+   recognition. Shapes represent actions and are inputed via 
+   the mouse, i.e. draw a B and the "b" key press is sent to 
+   your Xterm, draw a C and xcalc starts, draw an N and 
+   Netscape starts, etc.
+
+
+How to use
+----------
+See INSTALL for information on how to compile wayV.
+
+When wayV is running hold down the activation buttons. Draw 
+shapes (make gestures by moving the mouse), and when you're
+finished making a gesture release the activation button.
+
+wayV then tries to match a gesture with an action, e.g. 
+hold down mouse button 1, wait till a white border appears 
+around your screen, draw a C with the mouse, release mouse 
+button 1 and Xcalc should start if its on your computer and 
+in your path.
+
+
+Various notes
+-------------
+Read "doc/HOWTO-wayv-config" to understand how to configure
+wayV, and have a look at "doc/trained-gestures.jpg" to see 
+what default gestures wayV is setup for.
+
+When you're using wayV with user feedback on (this is the
+default) you MUST wait till a white border appears around
+your screen BEFORE attempting to drawn a gesture. The
+appearance of the white border tells you wayV is ready for 
+gesture capture and processing. 
+
+For those who are interested wayV uses a form of template 
+matching for its gesture recognition.
+
+
+Website
+-------
+http://www.stressbunny.com/wayv
+
