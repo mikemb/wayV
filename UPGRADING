@@ -1,0 +1,60 @@
+UPGRADING
+=========
+Author: Mike Bennett (wayv at stressbunny dot com)
+Last Update: 14/08/2003
+
+
+Index
+*****
+
+1. Upgrading from 0.2 to 0.3
+2. Upgrading from 0.1 to 0.2
+
+
+1. Section: Upgrading from 0.2 to 0.3
+*************************************
+
+There are no major changes when upgrading from version 0.2 to
+version 0.3, the main thing is that you can now define the Launch
+action (see wayv.conf) to use mouse button Mx where x refers to
+a button on your mouse.
+
+
+2. Section: Upgrading from 0.1 to 0.2
+*************************************
+
+Introduction
+------------
+This should be read by people who have used wayV version 0.1
+
+It outlines the important changes made to the main configuration
+file wayv.conf - from version 0.1 to version 0.2
+
+When you're installing wayV 0.2 make SURE you backup your existing
+wayv.conf file!
+
+
+Upgrading from 0.1 to 0.2
+-------------------------
+At the moment the only method to upgrade the wayv.conf file from
+version 0.1 to 0.2 is to either:
+
+1. overwrite it completely therefore loosing all your settings
+2. manually update the wayv.conf file to be 0.2 compliant
+
+Remember backup your existing wayv.conf first!
+
+Yes, there should be a shell script which does all this automatically -
+please write it :)
+
+- set Version to 0.2
+- serious extensions to Pretty structure, you're best copying
+  the from 0.2 into your 0.1 file and setting the sub-keys as required
+- small change to Universe, has new sub-key called vectors which
+  should be present
+- completely new structure called Include, you're best copying it 
+  from the 0.2 configuration file
+- make sure the file DEFAULT.wkey is in the same place as wayv.conf
+- every Gesture structure has a new sub-key called vector which should
+  be added to every Gesture (it can be set to "vector = ;")
+

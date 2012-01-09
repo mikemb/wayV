@@ -1,0 +1,270 @@
+Configuring wayV version 0.3
+============================
+Author: Mike Bennett (smoog at stressbunny dot com)
+Last Update: 14/08/2003
+
+
+IMPORTANT NOTES:
+- This HOWTO primarily focuses on the "wayv.conf" configuration
+  file.
+- See HOWTO-wayv-keymap for the second optional file. 
+- All the configuration files can be edited with a text editor.
+
+
+Contents
+--------
+- The Main Program "wayv"
+- Different Gesture Matching Techniques
+- Configuring Gestures & Actions
+- Activating Gesture Capture & Processing (was Mouse Activation)
+- Controlling The Display
+- User Feedback
+- More Information
+
+
+The Main Program "wayv"
+-----------------------
+wayV consists of 3 files.
+
+The first is called "wayv" - this is the program that does all 
+the gesture matching, enables drawing the gestures on screen, turns
+X & Y coordinates into gestures, etc. 
+
+Its easy to use - just type "wayv" and if the configuration file 
+"wayv.conf" is in the default (usually /usr/local/share) directory
+it'll start. On the other hand if the configuration file isn't
+found you'll have to specific where it is on the command line, 
+e.g. "wayv /path/to/the/configuration/file/name.file"
+
+There is a second configuration file, the keymap, usually
+referenced by wayv.conf but not always used. It is searched for
+in the same directory as wayv.conf and is normally called
+DEFAULT.wkey (see HOWTO-wayv-keymap).
+
+
+Different Gesture Matching Techniques
+-------------------------------------
+wayV has two different techniques for matching gestures, overtime
+this will expand.
+
+The key to set is Think, of which there are two possible options:
+
+	1. Pda
+		It works well and can recognize over 40 different
+		gestures. It doesn't take into consideration the
+		direction the gesture is drawn in. Note this will
+		always find a matching gesture - even if its very
+		baldy wrong.
+
+	2. Pda & Vector
+		Like Pda above except it takes direction into
+		consideration. It works at the moment but further
+		work is required.
+
+		The direction is recorded in the Gesture sub-key
+		vector, which is comma delimited and set-able to
+		N, NE, E, SE, S, SW, W and NW 
+
+
+Configuring Gestures & Actions
+------------------------------
+The main, and required, configuration file is called "wayv.conf".
+When you read the words "configuration file" from here on presume
+its wayv.conf.
+
+In wayv.conf you'll primarily be interested in the Action sub-sections.
+
+Every gesture has an action associated with it - to find out what 
+action is associated with what gesture have a look at a Gesture
+section - they start with the text "Gesture {" and end with 
+the text "}", e.g.
+
+	Gesture {
+		name = "A";
+		description = "A";
+		shape =
+		 0, 0, 0, 0, 1, 0, 0, 0
+     		, 0, 0, 0, 1, 1, 1, 0, 0
+		, 0, 0, 0, 1, 0, 1, 0, 0
+		, 0, 0, 1, 0, 0, 1, 0, 0
+		, 0, 1, 0, 0, 0, 0, 1, 0
+		, 0, 1, 0, 0, 0, 0, 1, 0
+		, 1, 1, 0, 0, 0, 0, 1, 1
+		, 1, 0, 0, 0, 0, 0, 0, 1
+		;
+		vector = NE, SE;
+		action = "Action A";
+	}
+
+Every Gesture section has a sub-key called "action =",
+the text between the quotes (after the equal) is the Action 
+section associated with the gesture.
+
+The vector sub-key is a new addition in 0.2.
+
+Every action section starts with "Action {" and ends with "}",
+e.g.
+
+	Action {
+		name = "Action A";
+		process = exec "netscape", wait "1", sendkey "l s Return";
+		match = "";
+	}
+
+The action sub-key "name =" is how a gesture is matched with
+an action. When Gesture.action = Action.name the action sub-key
+"process =" is used to carry out commands.
+
+The action sub-key "process =" can compose of five different
+commands:
+
+	1. exec "COMMAND TO EXECUTE GOES HERE"
+		Starts a program
+
+	2. warp
+		Jumps the mouse back to the initial start position of
+		a gesture
+
+	3. delay "INTEGER OF SECONDS TO WAIT"
+		Wait so many seconds (useful when combined with sendkey)
+	
+	4. kill
+		Kill the last command executed by wayV, this is handy
+		for canceling mismatched actions
+
+	5. sendkey "SPACE DELIMITED ALIAS(ES) FROM KEYMAP FILE"
+		Send a keypress to the active application or window
+		manager. Its the same as a key been pressed on the
+		keyboard.
+
+		An example of a composite keypress is:
+			sendkey "Control_L+c c"
+		(see HOWTO-wayv-keymap for more information)
+		
+and there can be multiple commands each separated by a comma,
+e.g. process = warp, exec "xcalc", sendkey "o n e";
+
+
+Activating Gesture Capture & Processing (was Mouse Activation)
+--------------------------------------------------------------
+When using wayV you need to press specific key and mouse button
+combinations to activate gesture capture. Once a gesture is
+captured its checked to see if there are any associated actions.
+
+The key in the configuration file to setup what activates the
+gesture capture is the "Launch =" key. It can have multiple
+parameters each separated by a ",". The parameters are:
+
+	Mx (where x is any number greater than 0) = Which mouse
+	                     button must be held down when
+			     drawing a gesture
+	SHIFT = Shift Key
+	LOCK = Caps Lock On/Off
+	CONTROL = Control Key
+	MOD1, MOD2, MOD3, MOD4, MOD5 = Other keys which can
+	                               be assigned with the
+	                               Unix command 'xmodmap'.
+
+An example of the setup wayV requires to begin gesture capture
+when mouse button 1 is held down is:
+
+	Launch = "M1";
+
+Another example to begin gesture capture when the Shift key 
+and mouse button 2 is held down is:
+
+	Launch = "M2,SHIFT";
+
+A final example for when the Shift key, the Control Key and
+mouse button 3 is held down is:
+
+	Launch = "M3,SHIFT,CONTROL";
+
+Note: There CAN only be one mouse button used as part of
+activation, i.e. you cannot hold down multiple mouse buttons 
+but multiple keys pressed at once can be setup and used.
+
+
+Controlling The Display
+-----------------------
+The display has been considerably improved and rewritten for
+version 0.2.
+
+The structure that has to contain the keys for the display
+is called Pretty. We'll go through each key in it in turn,
+note that some of the keys do interact with each other and
+change the overall result:
+
+	1. display
+		This is the main key - controls what type of
+		gesture input window, if any, appears. When a
+		gesture input window appears the path followed
+		by the pointer through it should be shown.
+
+		Can be set to:
+			- yes
+				full screen input window that
+				pops up on gesture activation
+			- no
+				no input window but the gestures
+				are still capture on gesture
+				activation
+			- X, Y, WIDTH, HEIGHT
+				always on screen input window
+
+				X = Upper left hand corner
+				    the input window starts
+				    on
+				Y = Upper left hand corner
+				    the input window starts
+				    on
+				WIDTH = width of the input window
+				HEIGHT = height of the input window
+
+	2. managed
+		Turns on or off whether the window manager attempts
+		to control the input window. This is only relevant
+		for input windows that has the X, Y, WIDTH, HEIGHT
+		set.
+
+			- yes
+				input window is exactly like all the
+				other applications on your desktop
+			- no
+				the input window cannot be moved or
+				managed. This is handy for PDAs (personal
+				digital assistants)
+
+	3. color
+		Not yet usable
+
+	4. size
+		If an input window is used this controls the width
+		of the lines drawn by the gesture path.
+
+	5. feedback
+		A very handy feature which I think is quite handy. If
+		its on a text box appears in the middle of the screen
+		after a gesture is inputted.
+
+		The text box tells the user what Action is matched with
+		the inputed gesture.
+
+			- yes
+				Especially handy if used in combination
+				with a gesture for the kill command (see
+				above in "Configuration Gestures & Actions")
+
+			- no
+				no user feedback box
+
+	6. wait
+		Length of time the user feedback, if its on, appears
+		on the screen.
+
+
+More Information
+----------------
+Righto that should be enough to get people started. Have a look
+at the wayV website (http://www.stressbunny.com/wayv) for more 
+information - and at the mailing lists for help.

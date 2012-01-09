@@ -1,0 +1,77 @@
+Features & Developments Roadmap
+===============================
+Author: Mike Bennett (smoog at stressbunny dot com)
+Last Update: 14/08/2003
+
+
+NOTE: This roadmap is obsolete till further notice, i.e. till I figure
+out the impact of the new development process.
+
+
+Contents
+--------
+- On Going
+- Phase 1
+- Phase 2
+- Phase 3
+- In the Future
+
+
+On Going
+--------
+These are features and developments in wayV that don't fall into 
+any particular version. They'll be added when I think they'd be an 
+interesting area of further research, really handy or just plain 
+old cool :)
+
+- new rules for gesture/pattern matching
+- new rules for gesture scaling and gridding
+- new types of actions
+- various ways of giving user feedback
+- other types of input devices
+- development issues (see TODO)
+
+
+Phase 1
+-------
+Completed
+
+
+Phase 2
+-------
+- "keyboard button press", "prompt" and "wait" actions will be
+  supported (MOSTLY DONE)
+- meschach will be phased out and the math functions will be implemented
+  internally (DONE)
+- webcams will be supported for gesture input (PARTIALLY DONE)
+- 1 rule will be supported for converting webcam images to gestures
+- the process will begin for cross platform support, initially porting the
+  backend to Windows for the mouse
+- user feedback with display prompts (MOSTLY DONE)
+- scaling translation of orbits to grids
+- gestures will have context, i.e. different actions for the same shape
+  when drawn over different applications (commonality of UI over diversity of
+  applications) (BEGUN)
+
+
+Phase 3
+-------
+- the frontend will be ported to Windows
+- the backend webcam support will be ported to Windows
+- experimental ways of interpreting gestures, i.e. try and catch more than
+  highest point 
+- look at taking direction into consideration for how the gestures are made,
+  i.e. gesture create from left to right instead of right to left will be
+  recognized as different (STARTED)
+- develop techniques for catching gestures in a 3 dimensional space
+
+
+In the Future
+-------------
+- ways of getting rid of the mouse and keyboard completely
+- ability to make gestures with various types of input devices
+- maybe develop dictionaries of common gestures
+- commonality of user interface over diversity of applications
+- time, speed and direction might be used
+- non-gui environments
+

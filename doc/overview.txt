@@ -1,0 +1,133 @@
+Overview: 2 Dimensional Gesture Based Extension to the Standard User Interface
+==============================================================================
+Author: Mike Bennett (smoog dot stressbunny at com)
+Last Update: 14/08/2003
+
+
+Contents
+--------
+- Abstract
+- Objectives
+- Background
+- Basic Infrastructure
+- Resources Needed
+- Future Possibilities
+
+
+Abstract
+--------
+A user is able to setup wayV to recognize gestures and associate actions
+with these gestures. When one of the gestures is inputed and matched an
+action associated with the gesture occurs, e.g. startup a program, send
+keypress', etc.
+
+The gestures are created via a 2 dimensional input device, in most cases
+the standard mouse.
+
+The gestures should be unique symbolic representations of the actions 
+they represent, i.e. draw an N and Netscape starts, draw a circle and
+Opera starts, draw an > and the keypress' to switch desktops occurs,
+etc.
+
+
+Objectives
+----------
+1. develop an extension to the standard user interface paradigm which
+   unfortunately has remained nearly static since the time of Xerox Parc 
+   in the 70's
+2. explore concepts in human computer interaction, especially with regards
+   to the way users interact with menus and desktop based shortcut icons 
+   (which are too often hidden)
+3. develop an easier and faster way of executing certain programs, i.e. 
+   when a user interacts with a computer they usually repeatedly run the
+   same programs - always having to navigate through the same various menus 
+   and sub-menus
+
+
+Background
+----------
+When using a standard desktop, we'll use Windows 98 as the example, a user
+can have desktop icons which function as shortcuts to execute programs. 
+These shortcut icons are often used to represent programs which are required 
+regularly. A major failing of this concept is the simple fact that the icons
+tend to be hidden when programs are running on the desktop, effectively 
+rendering the shortcuts useless.
+
+We are then left with the "Start" button - which while an adequate solution
+fails for a few reasons:
+- it has various menus and sub-menus which aren't easy to rapidly navigate 
+  or find things in
+- when using the mouse the user is forced to break their "flow" and go to
+  a very specific part of the screen
+- when using the keyboard the user is often forced to press the arrow keys
+  way too many times and then confirm their choice
+
+
+Basic Infrastructure
+--------------------
+Consist of 1 program and 2 configuration files.
+
+The program (wayv) runs, usually in the background, watching for certain
+X events. Once the appropriate events are received a transparent window
+is overlaid (depends on your wayV configuration) on the desktop. The end 
+user then makes a gesture with the mouse resulting in a pattern appearing
+on the screen. The pattern is then copied into memory, broken into a grid
+and the resulting grid is sent to the pattern matching system to check
+does it have a match. If it matches then the suitable actions are carried
+out. This program is written in C and links with various X libraries.
+
+The first configuration file, wayv.conf, stores:
+1. the X event(s) which activate the gesture capture
+2. the type of input displays and user feedback
+3. the relationship between patterns and actions
+4. the patterns to recognize
+5. the actions and how they're to be carried out
+6. miscellaneous as of yet unknowns
+
+The second configuration file, DEFAULT.wkey, stores:
+1. first column is the keycodes
+2. second column is an alias for the keycode
+3. optional third column is an alias for the keycode when Shift is pressed
+
+
+Resources Needed
+----------------
+Hardware
+- Computer running Unix with a functional X server
+- Functional mouse (pointer) that is recognized by the X server
+
+Software
+- Running X server
+- X window manager (CDE is sufficient)
+- X libraries with development headers
+- gcc, make, etc (if compiling from code)
+
+
+Future Possibilities
+--------------------
+An idea like this has a lot of potential in terms of further development.
+Some of the interesting possibilities are:
+
+- use a webcam instead of a mouse to do the gesture capture
+- experiment with ways of gesture capture in 3D space
+- capture gestures as more than merely paths through space, i.e. develop
+  techniques to capture small symbolic movements
+- develop possible fuzzy scaling/representations of gestures
+- examine what types of gestures are "good", i.e. easy to remember and
+  reproduce (actually this is one of the areas I'm REALLY interested in,
+  i.e. people's different cognitive models and how to design user interfaces
+  that work with them)
+- build on the concept of "flow" and non-intrusive command interfaces
+- examine implications of speed, direction and time in gesture creation
+- invent and explore techniques for end user feedback that reduce the
+  need to remember various gestures and the associated actions
+- find out whether having commonly defined "dictionary" of gestures is better
+  than letting/encouraging each person develop their own (obviously language
+  and cultural factors need to be considered)
+- examine the possibilities for use in non-graphical human computer
+  interaction
+- develop further ways of recognizing gestures (evolutionary computing could
+  be really interesting for that)
+- less research but still handy would be a Mac and Windows version. I've a
+  fair few friends who'd loved to use it but aren't Unix heads
+

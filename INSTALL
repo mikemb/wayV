@@ -1,0 +1,78 @@
+INSTALL
+=======
+Author: Mike Bennett (wayv at stressbunny dot com)
+Last Update: 24/04/2001
+
+
+Contents
+--------
+1. Installation & Compiling
+2. Using wayV
+3. Requirements
+4. Important Notes
+
+
+Installation
+------------
+1. ./configure 
+2. make
+3. make install
+   IF YOU'RE ALREADY USING wayV AND HAVE EDITED wayv.conf MAKE SURE AND
+   BACKUP A COPY OF YOUR VERSION!!!! (see the file UPGRADING for more
+   information)
+4. look at doc/trained-gestures.jpg to see what gestures wayV is setup
+   to recognize
+5. wayV's two configuration files, wayv.conf and DEFAULT.wkey, are installed
+   in /usr/local/share but it is possible to specify a different directory
+6. to start wayV run the program wayv (by default installed in /usr/local/bin)
+
+NOTE: If configure doesn't find XExtension and XTest you won't be able
+      to send keypress' via wayV
+
+Using
+-----
+Hold down the activation button (by default mouse button 2) and 
+key(s) (see doc/HOWTO-wayv-config for further information) and 
+move the mouse around.
+
+When the button and key(s) are released look at the xterm wayV is 
+running in. You'll see a grid filled in with 0s and 1s. The 1s should 
+indicate the path followed by the mouse. 
+
+If display output is turned on when you press the activation button 
+and key(s) a white border will appear around the screen - with the 
+path followed by the mouse highlighted in various colours.
+
+NOTE: When you're inputting a gesture, if the display is on, its
+best to wait till the white border appears before doing the gesture.
+
+
+Requirements
+------------
+1. A flavour of Unix (development occurs mainly on Linux and earlier 
+   versions were tested under Solaris and FreeBSD)
+2. Running X server with a pointer, e.g. a mouse, trackball, etc
+3. gcc and X libraries
+4. make, gcc, autoconf, install - all the usual
+
+Optional:
+1. X server that supports X extension
+2. X server that supports XTest (for sending fake keypress events)
+
+
+Important Notes
+---------------
+1. There aren't many default actions associated with the gestures, if
+   you draw a C Xcalc should start (presuming its in your path). Have
+   a look at the file src/wayv.conf, specifically the Action sub-sections.
+   Read doc/HOW-wayv-config to learn how to setup other actions.
+2. Have a look at wayv.conf, specifically the Launch value, if 
+   its M1 then mouse button 1 is the activation key, if its M2 then 
+   its mouse button 2 and if its M3 then its mouse button 3, etc.
+3. If the full screen input display is on and you press the activation
+   button(s) WAIT till the white border FULLY appears before drawing
+   a gesture.
+4. Make sure the main configuration file wayv.conf and DEFAULT.wkey are in
+   the default directory (usually /usr/local/share) or else specific where
+   to find them on command line when starting wayV, e.g. wayv /etc/wayv.conf
+

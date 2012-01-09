@@ -1,0 +1,2 @@
+?package(wayv):needs=X11 section=Apps/Tools\
+  title="wayV Handwriting Recognition" command="/usr/bin/wayv"

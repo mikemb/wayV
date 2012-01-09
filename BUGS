@@ -1,0 +1,13 @@
+Last Update: 14/08/2003
+
+- Sometimes wayV seems to just stop accepting inputs (?)
+
+- Managed input window doesn't send key press events properly
+
+- Lots of ones in the parser, both reading and writing but they shouldn't 
+  affect version 0.2 unless people are creating their own gestures and 
+  using %,"\ or ; in the wrong place in way's configuration file.
+  NOTE: This will be fixed in version 0.3, the parser will be completely
+  rewritten.
+
+- Modifier keys can affect the emulated key press'

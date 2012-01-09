@@ -1,0 +1,31 @@
+14/08/2003
+==========
+I'm (Mike) changing the development model of wayV. No longer am I going
+to go for rare big releases, instead I'm going to adopt a policy of code
+often, release often.
+
+This 0.3 release is primarily the excellent work of Nick Rusnov and his
+maintaince of wayV for Debian, including the various bug fixes and
+functionality improvements!
+
+24/04/2001
+==========
+Finished version 0.2 and released it. Whew :)
+
+19/02/2001
+==========
+The project is now fully active again and will continue so for the
+foreseeable future. Also migrated the website over to stressbunny.com
+
+02/08/2000
+==========
+Release version 0.1 - the first official release. This has keyboard
+modifiers, etc. Now there is a good framework which can be built
+upon.
+
+20/06/2000
+==========
+Launched the initial test version pre 0.1 - its numbered 0.0.9 and will
+only be around for a few days. Its just to iron out the few issues.
+
+Have a look at the ChangeLog for more up to date technical news.

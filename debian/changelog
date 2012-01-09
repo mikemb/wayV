@@ -1,0 +1,42 @@
+wayv (0.2-5) unstable; urgency=low
+
+  * Generalized fix to allow any mouse button to be used in the form of 
+    Mn in the configuration file. (Closes: #181452)
+  * Fixed header in wayv.conf.5 to remove lintian warning.
+  * Removed boilerplate thingy from copyright.
+  * Now Lintian-Clean(TM)!
+
+ -- Nick Rusnov <nickrusnov@debian.org>  Tue,  8 Apr 2003 12:21:51 -0700
+
+wayv (0.2-4) unstable; urgency=low
+
+  * I'm adopting the program. (Closes: #162061)
+  * Fixed manpage section for wayv.conf(5) and the reference in wayv.1. 
+    (Closes: #135410)
+  * Moved to debhelper. 
+  * Using packages make install again, but installing docs with debhelper.
+  * Jimmied the Makefiles.in to make everything work right, but its still
+    better than manually installing in the rules file.
+  * Fixed multiline literal and #endif compiler warnings in various headers.
+  * Fixed a couple of inclusion compiler warnings.
+  
+ -- Nick Rusnov <nickrusnov@debian.org>  Fri, 14 Feb 2003 10:30:01 -0800
+
+wayv (0.2-3) unstable; urgency=low
+
+  * Placed wayv.conf man page correctly in man/man5 as per Debian Policy. 
+  Closes: #134809
+    
+ -- Muhammad Hussain Yusuf <yusuf@debian.org>  Wed, 20 Feb 2002 21:07:31 +0000
+
+wayv (0.2-2) unstable; urgency=low
+
+  * Added build-depends xlibs-dev to debian/control.
+
+ -- Muhammad Hussain Yusuf <yusuf@debian.org>  Sun, 17 Feb 2002 07:43:53 +0000
+
+wayv (0.2-1) unstable; urgency=low
+
+  * Initial Release. Closes: #71287
+
+ -- Muhammad Hussain Yusuf <yusuf@debian.org>  Wed, 13 Feb 2002 15:32:09 +0000

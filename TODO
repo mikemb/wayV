@@ -1,0 +1,94 @@
+Last Update: 14/08/2003
+
+
+Todo for 0.4
+============
+- add screen annotate mode
+
+
+Todo for 0.5
+============
+- move configuration file to XML format
+- write program to transform old conf to upcoming XML format
+
+
+Todo for 0.X
+============
+- write GUI for wayV, maybe using wxWindows or Java (?)
+- support personalities
+- lower memory footprint
+- use orbits
+- implement proper event handling model
+- get rid of floats
+- update setup.* use MAXSUBS (or it'd be better to get rid of them)
+- remove global
+- rewrite the parser to work correctly
+- port to Windows
+
+
+Ongoing and in the future
+=========================
+- support -geometry X & Y parsing (KLUDGE - testing to see if useful)
+- give user feedback of match action (ONGOING)
+- sending keypress' (BEGUN)
+- write configuration front end
+- watch configuration file for changes and do auto-reload
+- update/rewrite parser to ignore fields, escape properly, etc
+- write up documents (ONGOING)
+- support radius and linear pda gesture matching
+- point to point line interpolation for shapes drawn very 
+  fast
+- allow setting of border colour
+- implement loadable module architecture for gesture matching
+  and receiving input
+- fix bugs (always and for ever after)
+- continue coding up vectors (Simon?)
+- optionally wayv backgrounds on startup
+- personalities (different action groups, e.g. send small a
+  or big A because of a gesture A)
+- new action to control switching between personalities
+- free unneeded memory in setup to reduce memory footprint 
+  for mobile devices
+- touch as a form of activation/activation button
+- input window can contain user feedback
+- application dependent personalities (scope)
+- have gestures generate actions specific to applications
+- set-able border picture and background
+- display application dependent gestures on screen when gesture
+  input activated
+- implement xscribble gesture recognizer 
+- redesign configuration file to support different forms of gesture
+  records (Orbits with time)
+- support for different languages (localize)
+- description in action feedback
+- fade out feedback as eye candy
+- control feedback position, colours, font size and style
+- double click activation, delay time activation
+- change drawable prompt
+- gestures made of multiple lines, doesn't have to be one drawn
+  action
+- configuration file stored as binary file with compression to
+  reduce memory requirements
+- create upgrade script to support upgrading existing configurations 
+  to new types
+- if program already running bring it to the foreground
+- have other gesture input devices (webcam, etc)
+- gesture/action creation wizard
+- create input string block tokenizer
+- write a better event handler management system
+- let external programs be callable before gesture input activated
+  and after it finished, i.e. turn on or off sounds, LEDs, etc
+- input mode without GUI, suitable for text mode
+- line melting, do subtraction on gesture, delete in on bounded boxes
+  that have 1 pixel cross over - result in close match
+- optional always on top input windows
+- input window divided into different regions with each region 
+  associated with a different personality
+- activate wayV by sending a message via a pipe, or equivalent, which
+  means pop-up is separated and can be more system specific
+- popup input window can cover only certain areas of the screen
+- direction matching optional to each gesture
+- implement L based gesture matching to experiment 
+- develop evolutionary gesture matching as an experiment
+- composite keypress building (not sure)
+

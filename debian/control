@@ -1,0 +1,13 @@
+Source: wayv
+Section: x11
+Priority: optional
+Maintainer: Nick Rusnov <nickrusnov@debian.org>
+Build-Depends: debhelper (>> 3.0.0), xlibs-dev (>> 4.0.3)
+Standards-Version: 3.5.8
+
+Package: wayv
+Architecture: any
+Depends: ${shlibs:Depends}
+Description: Experimental hand writing/gesture recognition program
+ Enables human computer interaction, especially using gestures inputed via 
+ the mouse.

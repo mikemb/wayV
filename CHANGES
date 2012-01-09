@@ -1,0 +1,45 @@
+Last Update: 14/03/2003
+
+Version 0.3
+===========
+- Launch can now use any numbered mouse pointer (thanks to Nick Rusnov)
+- Man page fixes (thanks again)
+- code compilation fixes (and again :)
+- adoption of a new development model
+
+Version 0.2
+===========
+- carried out significant work on display so it now supports:
+ * no input window
+ * a popup full display input window
+ * an input window whose size is completely set-able
+ * option to control whether input windows are managed by the window manager
+- user feedback added that tells the end user what action was matched
+- option to control how long the user feedback appears on the center
+  of the screen
+- keymaps files, via new Include structure in wayv.conf, used to control 
+  what keycodes to send
+- second gesture matching method that uses the direction the gesture was
+  made in (Pda & Vector) (thanks to Simon Hart)
+- vector key added to Gesture for direction matching
+- 2 new processes for Action:
+ * sendkey (send keypress')
+ * kill (kill the last application that was started by wayV)
+- experimentally extension of exec so starting and placing an X application
+  is a single occurrence (WAYV_MOUSE_START and WAYV_MOUSE_END)
+- bug fix so straight lines are recognizable (thanks to Simon Hart)
+- bug fix so command lines in exec are working properly
+
+Version 0.1
+===========
+- first public version
+- initial documentation
+- basic configure build script
+- wayv.conf readable with matrixes storing gesture information
+- 3 processes in Action: exec (start app), warp (move the mouse) and
+  delay (wait X seconds between processes)
+- gesture activation via pointer buttons and modifier keys
+- display:
+ * no input window 
+ * popup full screen input window
+- width of gesture path line set-able

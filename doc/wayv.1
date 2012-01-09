@@ -1,0 +1,32 @@
+.\" -*- nroff -*-
+.TH "wayv" "1" "August 2003" "0.3" "X Windows application"
+.SH "NAME"
+wayV \- capture drawn shapes (gestures), recognize them and carry out associated actions
+.SH "SYNOPSIS"
+.B wayv
+.I [configuration file]
+.SH "DESCRIPTION"
+A user is able to setup wayV to recognize gestures and associate actions
+with these gestures. When one of the gestures is inputed and matched an
+action associated with the gesture occurs, e.g. startup a program, send
+keypress', etc.
+.PP 
+The gestures are created via a 2 dimensional input device, in most cases
+the standard mouse.
+.PP 
+The gestures should be unique symbolic representations of the actions
+they represent, i.e. draw an N and Netscape starts, draw a circle and
+Opera starts, draw an > and the keypress' to switch desktops occurs,
+etc.
+.SH "FILES"
+.IP wayv.conf
+is the required configuration file. It is used to configure the user interface, what gestures are recognized, what actions are performed, etc.
+.IP DEFAULT.wkey
+is an optional configuration file. It contains the keymaps for keycode, see
+HOWTO-wayv-keymap that comes with wayV.
+.SH "AUTHOR"
+wayV was written by Mike Bennett (smoog at stressbunny dot com) with contributions from various others.
+.SH "URL"
+wayV \- http://www.stressbunny.com/wayv
+.SH "SEE ALSO"
+.BR wayv.conf(5)

@@ -1,0 +1,133 @@
+wayV version 0.2: Keymaps
+=========================
+Author: Mike Bennett (smoog at stressbunny dot com)
+Last Update: 23/04/2001
+
+
+Contents
+--------
+- What are keymaps
+- Using keymaps
+- Creating keymaps
+- Important notes
+- Potential Problems
+
+
+What are keymaps
+----------------
+Keymaps enable wayV to carry out keypress emulation in a language and,
+some what, hardware independent manner.
+
+Ok, that isn't very clear so I'll use some examples. First have a look at
+the file "DEFAULT.wkey", it should be in wayV's src directory. Here are
+4 lines from it:
+
+	38 a A
+	47 Semicolon :
+	48 ' @
+	105 Page_Down
+
+Notice the way each line begins with a number, this is called the keycode.
+Following the keycode are one or two more columns, and each column is
+separated by a space.
+
+The second column is the keypress in a normal state, e.g. press 'a' on
+your keyboard and you get 'a' on your screen. The third column (which
+usually isn't required) is the keypress in a shifted state, e.g. hold down
+SHIFT and press 'a' on your keyboard and you get 'A' on your screen.
+
+Basically the second and third columns are names for keycodes. The
+names don't have to be single letters, but a single line should not be
+more than 512 characters in length.
+
+Now I'll explain what keycodes are. Here's hoping the above is clear in
+your head? Keycodes are what X uses to represent keypress', so if you
+press 'a' X sees it as the keycode 38.
+
+Therefore keymaps are used to provide a list of keycodes that are 
+available to wayV. The second column and, optional, third column 
+are used to create aliases for the keycodes. The aliases are used
+in the wayv.conf file when we want to send a keypress via the
+"sendkey" command.
+
+
+Using keymaps
+-------------
+Keymaps are very simple to use, just edit your wayv.conf file (see
+HOWTO-wayv-config for further information). Go to the Include 
+section that has the sub-key "type" set to "Keymap", you can then
+edit the "file" sub-key to specify which keymap to use.
+
+At the moment wayV only comes with one default keymap, called
+DEFAULT.wkey, but that will change over time as keymaps for other
+languages and types of hardware become available (yep, please contribute
+them!).
+
+Once a keymap is included in wayv.conf you can then use any of the
+aliases available in it for the sendkey command, e.g. using our
+examples above (NOTE: spaces are delimiters):
+	sendkey "A @ a Semicolon";
+results in the X thinking the following key's were pressed on your
+keyboard:
+	SHIFT+a
+	SHIFT+'
+	a
+	;
+
+To send composite keypress', e.g. Control and Shift and a, use:
+	sendkey "Control_L+Shift_L+a"
+
+To send a mixture of single and composite keypress' use:
+	sendkey "a b c Control_L+c d e"
+
+
+Creating keymaps
+----------------
+In case it ain't obvious by now - please send on keymaps for other
+languages. Keymaps allow keypress' to be sent for any language, or
+at least they should :)
+
+Anyway the easiest way to create a keymap is to use the xev command, it
+usually comes with X, if not its easy to find on the net. While running
+X start xev via an xterm, or the equivalent, and up will pop a new
+window, usually titled "Event Tester".
+
+Now, making sure the xev window is active, press a key and look at the
+xterm window. You'll see lots of information appearing, most of it isn't
+useful to you but what you're interested in is the information starting
+with KeyPress, e.g.
+
+ KeyPress event, serial 23, synthetic NO, window 0x1200001,
+    root 0x30, subw 0x0, time 3885003998, (50,211), root:(259,444),
+    state 0x0, keycode 38 (keysym 0x61, a), same_screen YES,
+    XLookupString gives 1 characters:  "a"
+
+The above KeyPress event occurred when I pressed 'a' on the keyboard.
+
+Notice the way the keycode is 38. Now just edit your wayV keymap
+file, create a new line, set the key code to 38 and the second column
+to what ever you want to refer to that keypress as, in this case 'a'
+is easiest. If the key has a different letter associated with it
+when the SHIFT key is pressed enter an alias for that in the third
+column, e.g.
+	38 a A
+
+Keep on repeating the above, with xev, till you've captured all the
+keypress' required.
+
+
+Important notes
+---------------
+- wayV's current parser isn't robust, in fact it needs a serious clean
+  up but till that happens avoid using the following letters in your
+  aliases ; " ' = % , # and space. Instead use longer aliases, e.g.
+  Semicolon, Quote, Singlequote, Equal, Percent, Comma, Hash, Space,
+  etc.
+
+
+Potential Problems
+------------------
+- you may find that a keypress event isn't occurring even though its
+  setup properly in both wayv.conf and DEFAULT.wkey. If this is the
+  case it may be a simple matter of confirming the DEFAULT.wkey keycodes
+  match the alias'. Use xev as above in "Creating keymaps".

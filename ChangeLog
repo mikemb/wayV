@@ -1,0 +1,561 @@
+NOTE: The upper case letters in () refer to the authors who made the changes,
+and anything with () was done by Mike. The date format is DD/MM/YYYY.
+
+14/08/2003
+==========
+- updated AUTHORS (MB)
+- updated UPGRADING to inform users of any changes when moving from version
+  0.2 to version 0.3 (MB)
+- updated BUGS, NEWS, README (removed "It'd be appreciated"), TODO, VERSION,
+  doc/overview.txt, doc/roadmap.txt, doc/wayv.1, doc/wayv.conf.*
+- fixed doc/HOWTO-wayv-config to reflect ability to use more than just 5
+  mouse/pointer launch buttons
+- the debian directory is now left as part of the standard distribution
+- updated code with new date and email block
+
+8/04/2003
+=========
+- generalized fix to allow any mouse button to be used in the form of Mn
+  in the configuration file (NR)
+- fixed header in wayv.conf.5 to remove lintian warning (NR)
+- removed boilerplate thingy from copyright (NR)
+
+13/02/2003
+===========
+- fixed manpage section for wayv.conf(5) and the reference in wayv.1 (NR)
+- fixed multiline literal and #endif compiler warnings in various headers (NR)
+- fixed a couple of inclusion compiler warnings (NR)
+
+XX/XX/2002
+==========
+- began Windows port, but stopped, going to do later on when I move over
+  to XML parser for configuration file (MB)
+
+20/02/2002
+===========
+- Placed wayv.conf man page correctly in man/man5 as per Debian Policy (MY)
+
+24/04/2001
+==========
+- updated DEFAULT.wkey, HOWTO-wayv-config, wayv.1, wayv.conf.1, README
+- added UPGRADING that contains information for people upgrading from
+  version 0.1 to 0.2, it explains the main changes required to wayv.conf
+
+23/04/2001
+==========
+- added CHANGES to record what improvements are made between the stable
+  releases of wayV
+- updated INSTALL, HOWTO-wayv-keymap, overview.txt, roadmap.txt,
+  wayv.conf
+
+21/04/2001
+==========
+- updated AUTHORS, NEWS, BUGS, trained-gestures.jpg
+- bugfix in setup.c:parseSetup() so it doesn't seg fault as easily (yet
+  again its the rubbish parser)
+- setup.c:readSetup() ammeded so version is NULL, helps detect if the
+  configuration file isn't right
+
+19/04/2001
+==========
+- got rid of misc.*:parseArgs() - its too late to be putting that into
+  version 0.2
+- ammended configure.in, src/Makefile.am and defines.h to use SETUPPATH
+  so the configuration file is looked for in the right place
+- setup.c:parseSetup(), parseInclude() report clearer error messages if
+  they have problems finding the appropiate files
+- changed setup.c:parseSetup() to figure out the right path to the 
+  keymap (it'll be rewritten for the next version)
+- removed cannot find file error message from backend.c and updated to
+  be a little more flexiable with the passed in parameter
+- DEFAULT.wkey is now installed in the same default directory as wayv.conf
+
+17/04/2001
+==========
+- found a bug there zombie processes where created by the user feedback
+- added process.*:setupSignals() to manage the signal hanlders required
+  by wayV. It only useful for SIGCHLD at the moment but in later versions
+  that'll change
+- move the signal setup from process.c:performAction() to backend.c
+- created misc.*:parseArgs() and the struct MARGS to parse the commandline
+  parameters passed to wayV
+
+16/04/2001
+==========
+- rename wayv.key to DEFAULT.wkey, decided all wayV keymaps should end
+  in .wkey
+- created doc/HOWTO-wayv-keymap to explain using and creating the new
+  keymaps
+- renamed setup.*:getSpaceText() to getDelimText() and ammended it to
+  to work with parameter passed token (must rewrite the parser)
+- update process.c:performAction() to send keypress' correctly, including
+  composite key press' - means key press stuff is done and dusted for
+  version 0.2
+- updated display.c:setupPointer() to properly setup what input events
+  to receive
+- clearly I was delusional when I wrote the original event handling 
+  and pointer grabbing but I've fixed it therefore backend.c should be
+  faster
+
+14/04/2001
+==========
+- changed the layout of backend.c so its a little more optimised
+- finally decided how to approach keypress emulation - after reading 
+  the code for xev, xscribble and gtkeyboard
+- added Include {} to configuration, extended setup.*:readSetup(), 
+  parseSetup()
+- created setup.*:processInclude() to parse the various include files,
+  at this stage it only does keymaps
+- completely rewrote display.*:sendKey() to use the user configurable
+  keymaps
+- created a basic keymap, its the file called wayv.key and is used by
+  wayv.conf
+- ammended process.c:performAction() to manage sending keypress'
+
+09/04/2001
+==========
+- update the TODO with a few new things and created basic 0.3 plan
+
+26/03/2001
+==========
+- patched display.c:setupDrawable() to put a 1 pixel black border around
+  an always on top input window
+
+22/03/2001
+==========
+- got rid of mouse.* and moved its one function to display.*, renaming
+  it to display.c:setupPointer()
+- ammended files that used setupMouse() and updated the build scripts
+- coded display.*:sendKey() to use a static array for special characters
+  (and it might make localisation easier later on?)
+
+21/03/2001
+==========
+- renamed display.*:sendKeyPress() to display.*:sendKey() and developed
+  inital code to manage special characters
+
+18/03/2001
+==========
+- changed display.*:setupDrawable() to set window properties and
+  set backend.c to pass in the extra parameters
+- coded the input window to receive the close window client message
+  and extended backend.c to handle the ClientMessage event
+
+17/03/2001
+==========
+- added the file VERSION, to more easily control the version information,
+  and updated configure.in to use it
+- removed wayv.jcc (Code Crusader IDE project file)
+- seriously improved the build setup, now properly checks for X libs
+- ammended display.c to use XExtension and XTest functions if available
+- created two basic man pages and created doc/Makefile.am to install them
+  correctly
+- update src/Makefile.am to install wayv.conf properly
+
+15/03/2001
+==========
+- bug fix in setup.c:parseVectors(), memory over run
+- bug fix in process.c:createCmdLine(), memory over run
+- updated TODO with a lot of future possibilities
+
+13/03/2001
+==========
+- fixed input window bug in backend.c where other mouse presses could
+  be used to draw 
+- updated most of the *.c files, reduced the history information on
+  each function to at most 3 dates - this is the function comment
+  header style going forward. I'll writing a code HACKING document for
+  the 0.2 release
+
+12/03/2001
+==========
+- rewrote display.c:setupDrawable() to properly setup an input
+  window
+- added CLEAR to display.c:handleDrawableWindow() to clear a window
+- updated backend.c to use CLEAR so previously drawn gestures aren't
+  left on the input window
+- added new option (Pretty.managed) to the configuration that controls
+  turning on or off whether the input window is managed by the window
+  manager (updated setup.*:parseSetup())
+
+04/03/2001
+==========
+- wrote code to setup an input box (specifically to support wayv
+  used on mobile devices)
+- updated setup.c:parseSetup() to parse the Pretty.display key
+  if set to input box
+- added checks to backend.c to see if display input box
+- updated mouse.c:setupMouse() to check for input box to match
+  mouse actions on
+- extended display.h WPRETTY with window[] for input box area
+- added new parameters to display.*:setupDrawable() to allow
+  the x and y defining of the drawable to create
+
+03/03/2001
+==========
+- sending single keypress' of non-special keys is now working
+- added process.h WA_SENDKEY to match for keypress'
+- updated process.c:performAction() to parse the configuration
+  file for keypress' to send as actions
+
+01/03/2001
+==========
+- got display.c:writeText() working - now feedback of what
+  action is matched is displayed in a popup window
+- updated process.c:createCmdLine() to support WAYV_MOUSE_START
+  and WAYV_MOUSE_END for more intelligent window placement (its
+  a quick kludge for now)
+- added WA_KILL to process.h for new config key
+- fixed up process.c:performAction() to support cancelling/killing
+  of started programs
+- updated setup.c:parseProcess() to look for the kill command in
+  the configuration
+- begin code for sending key presses
+
+28/02/2001
+==========
+- updated setup.c writeSetup(), parseSetup(), setup.h to support
+  user feedback
+- updated backend.c to use the config feedback setup
+- updated backend.c to handle the delays associated with feedback
+  cleanly, i.e. fork off another instance of wayV to close the
+  windows - later on it'll do fades, etc.
+- added 2 new keys to the wayv.conf Pretty configuration structure.
+  "feedback" which turns on or off the display of what action was 
+  matched (not fully working yet) and "wait" which specifies in
+  milli-seconds how long the feedback should be displayed
+
+21/02/2001
+==========
+- created display.*:createDisplay() to setup a GDISPLAY structure
+- renamed functions in display.*, setupWindow() to setupDrawable(), 
+  createDisplayWindow() to createDrawableWindow(), mapDisplayWindow()
+  to mapDrawableWindow(), unmapDisplayWindow() to unmapDrawableWindow()
+- updated the source configuration files to build cleaner
+- got rid of display.*:createDrawableWindow() and merged the code
+  into setupDrawable()
+- got rid of display.*:unmapDrawableWindow(), renamed mapDrawableWindow()
+  to handleDrawableWindow() and rewrote to control aspects of windows
+- began serious writing of display.c:writeText(), should be finished it
+  after the next coding session
+
+19/02/2001
+==========
+- added misc.c and misc.h for new non-specific functions
+- created misc.c:waitMilli() to wait X number of milli seconds
+- updated backend.c to wait X number of milli-seconds before closing
+  wayV's UI feedback
+- updated configure.in to check for more header files and updated
+  src/Makefile.in to compile up misc.*
+
+14/02/2001
+==========
+- updated all the copright messages in the source code for year 2001
+- changed my email address to stressbunny.com
+- rewrote parts of HOWTO-wayv-conf and moved to the doc directory
+- got rid of various files from the docs directory
+- rewrote roadmap.txt and overview.txt
+
+13/02/2001
+==========
+- began code to optionally tell the user what action, if any, was matched
+- added display.h:GDISPLAY->font to store information on a loaded font
+- created display.c:writeText() for writing text to a window
+- updated display.c:setupDisplay() to load a font
+- updated backend.c:main() to tell user matched action
+
+10/02/2001
+==========
+- moved wayV off SourceForge to stressbunny.com/wayv
+- rewrote wayV webpages as required
+
+15/08/2000
+==========
+- began code in process.c:performAction() to parse the commandline and 
+  replace values
+
+08/08/2000
+==========
+- added Simon Hart's code to the main codebase - renamed his functions 
+  to wayV's coding conventions
+- updated ai.h and ai.c:findGesture() with new rule called AIRULE_PDA_VECTOR 
+  which does PDA with Simon's vectoring (sense of direction)
+
+03/08/2000 (Simon P Hart)
+==========
+- added direction based recognition 
+  (badly called vectors - it ignores distance and so should be changed)
+  it works seperately to the pda recognition, then improves the score of
+  a match if the directions match.
+- made input grid enarge for short side of (almost) straight lines so that 
+  the almost straight line can be distinguished from a 45 degree line 
+- fixed setup parameters to be not null if a parameter is missed from the ini
+  file to prevent a segv 
+
+31/07/2000
+==========
+- added kmodifier to setup.h:WLAUNCH structure and changed pbutton
+  type
+- updated setup.c:parseSetup() to support keyboard modifiers in
+  the wayv.conf Launch key
+- ammended mouse.h with new keyboard modifier defines
+- updated mouse.c:setupMouse() to use keyboard modifiers
+- added setup.c:getSpaceText() to tokenize a string based on spaces
+- fixed bug in setup.c:parseProcess(), process.c:performAction()
+  and setup.h:WA_PROCESS which didn't allow command line parameters
+
+25/06/2000
+==========
+- various minor documentation updates pre 0.1
+- marked a bug as not existing
+
+19/06/2000
+==========
+- added configure.in, configure, install-sh, missing, mkinstalldirs,
+  src/Makefile.am and src/Makefile.in to make compiling easier
+- removed VERSION because configure.in now contains version information
+- updated various documents to help the end-user setup wayV
+- updated defines.h and added PDA_REFUSE to set a threshold so
+  gestures which don't have any realistic match aren't matched
+- updated ai.c:findGesture() with PDA_REFUSE threshold
+
+16/06/2000
+==========
+- after comming up with a new technique for gesture matching which is
+  far better than previous methods so I'm completely getting rid of
+  all neural net related code
+- updated aimath.c:printMat() format the output slightly different
+- decided to get rid of all the neural net (nn) stuff - its cack
+- rewrote backend.c getting of nn usage
+- got rid of ai.c:trainMnet() and ai.c:matchNnet()
+- moved process.c:findGesture() to ai.c and got rid of the neural net
+  based gesture matching
+- moved process.c:pointDensityAnalysis() to ai.c
+- cleaned up the code to compile perfectly with "-Wall"
+- got rid of code in setup.h that had entries for brains
+- got rid of code in setup.c:readSetup(), setup.c:writeSetup(), 
+  setup.c:processSetup(), setup.c:parseSetup() that dealt with brains 
+  (neural nets)
+
+15/06/2000
+==========
+- slightly changed setup.c:parseMSpace() to convert matrices so they're
+  stored in the configuration file in a more user friendly mannger
+- bug fix in gesture.c:gridGPoints() - I was casting floats to ints and
+  not paying any attention to rounding - ment the gesture matrices weren't
+  always right
+- added gesture.c:float2Int() to properly handle converting floats to
+  ints
+- created aimath.c:subMat() to use as part of point density analysis
+- updated aimath.c:denormMat() to return a pointer to the changed matrix
+- created aimath.c:pdaMat() to count the number of X int's in a matrix,
+  used as part of point density analysis
+- fixed loads of functions which were creating memory leaks - I was 
+  been silly and had forgotten to use freeMat() - instead I was using 
+  free() - duh!
+- added new gesture matching technique to process.c:findGesture()
+- added process.c:pointDensityAnalysis() to do the analysis required to
+  match gestures - this is a new technique which I came up with
+
+13/06/2000
+==========
+- updated backend.c to support specifying the configuration file to open
+  at the command line
+- added process.c:destroyZombies() to get rid of zombie child processes
+  (not sure how that affects the portability of the code?)
+- updated process.c:performAction() so that child processes aren't closed
+  when the parent is and to deal with child zombie process properly
+- updated all the source code with the GPL License information and added
+  the complete license file
+
+10/06/2000
+==========
+- changed aimath.c:printMat() to support the new matrix structure
+- rewrote aimath.c:transMat() getting rid of Meschach
+- rewrote aimath.c:mulMat() which now runs faster
+- rewrote aimath.c:resizeMat() - yipee all the AI math stuff is done :)
+
+09/06/2000
+==========
+- added aimath.c:setMat() to set all the entries in a matrix to the
+  same value
+- rewrote aimath.c:addMat()
+- got rid of aimath.c:invMat() - it wasn't needed anymore
+- updated the Makefile to compile without Meschach
+
+07/06/2000
+==========
+- created MATRIX structure in aimath.h
+- rewrote aimath.c:createMat() and aimath.c:freeMat() to get rid of
+  Meschach
+
+24/05/2000
+==========
+- rewrote ai.c:trainNnet() to create multiple brains for the gestures
+- rewrote process.c:findGesture() to do action matching using the multiple
+  brains
+- updated backend.c so it now uses multiple brains
+
+20/05/2000
+==========
+- updated backend.c to turn on/off user feedback based on the
+  configuration file
+- bug fix in setup.c:parseSetup() where I'd forgotten to strip the
+  quotes from gesture actions
+- added support to setup.c/h to parse process lists in an action and
+  create list of sub-actions
+- created setup.c:getQuoteText() to get quoted text
+- finished process.c:performAction() to handle execute, warp and delay
+  sub-actions
+
+16/05/2000
+==========
+- updated display.c:createDisplayWindow() to drawn a white border around
+  the whole display when drawn input mode is activated
+
+14/05/2000
+==========
+- updated process.c:performAction() to close on error starting a child
+- updated display.c:createDisplayWindow() to invert colors as the line is
+  drawn over them
+
+13/05/2000
+==========
+- updated process.c:performAction() to properly disassociate from the
+  display in the child
+- finished display.c:setupDisplay()
+- added UNSETINT and UNSETCHAR to defines.h for setting empty defaults,
+  esp. in display.c
+- added display.c:getDisplayInfo() to set values in a GDISPLAY
+  structure when a display has been opened
+- added display.c:createDisplayWindow() to create an output window to
+  draw on
+- added display.c:mapDisplayWindow() and display.c:unmapDisplayWindow()
+  to show and hide the output window
+- added display.c:writePixels() to connect some X and Y points via lines,
+  this is used to draw the gesture on screen
+
+10/05/2000
+==========
+- whew discovered that the xevent handling wasn't working correctly for
+  the mouse....eventually I figured out what I was doing wrong :)
+- renamed usex.c/h to display.c/h
+- rewrote display.c:setupXEnv() to be display.c:setupDisplay() and
+  create the GDISPLAY struct
+- rewrote display.c:closeDisplay() to support the GDISPLAY struct
+- added mouse.c/h
+- created mouse.c:setupMouse() to setup how mouse events are going
+  to be captured
+- rename main.c to backend.c
+- updated Makefile to reflect all the filename changes have specific
+  information for building the backend of wayV
+- added WLAUNCH to setup.h to support various launch options
+- ammended setup.c:parseSetup() to handle the newly added WLAUNCH
+  structure
+- updated setup.c:writeSetup() to write out WLAUNCH
+
+08/05/2000
+==========
+- ok after fixing the weird malloc/realloc error in http.c:delCookie(),
+  it was all my fault, a little bit of silliness overwriting memory
+- added ai.c:hebbRotate() for rotating a matrix after attempted match,
+  then removed it...it wasn't required after all
+- created aimath.c:rescaleMat() to change the shape of a matrix while
+  preserving the values
+- got rid of printMatRatio() because printMat() and rescaleMat() can
+  do the equivalent
+- added aimath.c:cmpMat() to compare two matrices
+- created gesture.c:findGesture() to try and find a gesture in the
+  gesture space
+- created process.h/c to hold processing and matching of gestures
+- move gesture.c:findGesture() to process.c:findGesture(), mostly
+  because of weird compile time errors
+- created process.c:performAction() to process an action list in a
+  gesture structure...at the moment it doesn't process an action
+  properly but will execute a program :)
+
+07/05/2000
+==========
+- hmm, getting strange happenings when using malloc and realloc under
+  Linux 2.2.12-20, egcs-2.91.66, RedHat 6.1 - core dumps are occuring
+  for no sane reason that I can see
+- updated gesture.c:gridGPoints() to return a MATRIX with a gesture
+- updated ai.c:matchNnet() to perform AI Hebb rule matching
+- added aimath.c:denormMat() to convert a matrix from +1/-1 to +1/0
+
+06/05/2000
+==========
+- updated ai.c:trainNnet() to support the Hebb Rule
+- added setup.c:parseMSpace() for converting a matrix to the ascii
+  comma delimited equivalent
+- updated setup.c:writeSetup() to translate the matrices to ascii
+  representations
+- extended setup.c/h:getKeyText() to support stripping of quotes and
+  updated various function usage in setup.c
+- add "description" key to the gesture structure and extended various
+  setup.c/h functions to support it
+
+03-05/05/2000
+=============
+- after spending the last few days looking at matrix math thinking
+  I already need to replace meschach, the end result is that I won't
+  be doing that (yet)
+
+02/05/2000
+==========
+- updated aimath.c:normMat() to create a new matrix and return it
+  and changed to convert less than 1 to -1
+
+01/05/2000
+==========
+- added in better function documentation to aimath.c
+- added aimath.c:copyMat() for copying one matrix to another
+- added aimath.c:cloneMat() for making an exact clone of a matrix
+- stripped out a most of the functions from ai.c
+- added proper function documentation to ai.c
+- finished ai.c:trainNnet()
+
+30/04/2000
+==========
+- created roadmap of the features and developments up to version 0.3
+- worked on the functional specification
+- changed the website design slightly
+
+29/04/2000
+==========
+- worked on the functional specification
+
+27/04/2000
+==========
+- created a lot of graphics and diagrams for the functional
+  specification
+- wrote up quite a lot of the functional specification
+- rewrote the overview slightly and turned it into HTML
+- added both documents to the website and the CVS
+
+23/04/2000
+==========
+- updated setup.c, renamed functions and added a wrapper, readSetup(),
+  grouping config file related functions together
+- renamed 2 functions in setup.c
+- added setup.c:processSetup() to post process the configuration
+  struct and convert various ascii keys to data structures
+- added setup.c:getKeyNum() to get int back instead of text key
+- edited setup.c:parseSetup() to use setup.c:getKeyNum() and to
+  set fields to defaults
+- updated aimath.c:printMat() to display more than just 1's or 0's
+- added setup.c:parseGSpace() to convert gridspaces into matrices
+- created setup.c:writeSetup() to write out the setup file
+
+18-20/04/2000
+=============
+- worked on the functional specification
+- researched webcams
+
+15/04/2000
+==========
+- learn X and write backend for catching mouse events (MOSTLY DONE)
+- learn GTK and design front end
+	* design UI (MOSTLY DONE)
+- learn about neural nets (DONE)
+- obtain matrix library (DONE)
