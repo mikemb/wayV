@@ -33,6 +33,8 @@
 #include "gesture.h"
 #include "process.h"
 
+int child;
+
 /*
  * Purpose:
  *	Carry out a list of actions in a gesture struct

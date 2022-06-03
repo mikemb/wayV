@@ -27,7 +27,7 @@
 #include "display.h"
 #include "gesture.h"
 
-int child;
+extern int child;
 
 void performAction(WSETUP *, WGESTURE *, GDISPLAY *, GPOINT *);
 void destroyZombies(int);
